@@ -13,12 +13,12 @@ public class Ball : MonoBehaviour
     TextMeshProUGUI  ballSpeed;
 
     [SerializeField]
-   [Range(1.0f, 10.0f)]
+   [Range(1.0f, 20.0f)]
     private float speed = 5f;
     
     [SerializeField]
     [Range(1.0f, 2.0f)]
-    private float openingHandicap = 1.25f;
+    private float openingHandicap = 1.6f;
     private bool waitingForFirstCollision = true;
 
     private Vector3 lastPosition;
