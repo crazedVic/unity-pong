@@ -10,7 +10,6 @@ public class BasePaddle : MonoBehaviour
     protected  Rigidbody2D rb;
     protected SurfaceEffector2D surfaceEffector;
 
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,11 +17,4 @@ public class BasePaddle : MonoBehaviour
          surfaceEffector = GetComponent<SurfaceEffector2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-     
 }

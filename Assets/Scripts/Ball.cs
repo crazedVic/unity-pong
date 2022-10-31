@@ -13,7 +13,7 @@ public class Ball : MonoBehaviour
     TextMeshProUGUI  ballSpeed;
 
     [SerializeField]
-   [Range(1.0f, 20.0f)]
+    [Range(1.0f, 20.0f)]
     private float speed = 5f;
     
     [SerializeField]
@@ -22,7 +22,6 @@ public class Ball : MonoBehaviour
     private bool waitingForFirstCollision = true;
 
     private Vector3 lastPosition;
-
 
     // Start is called before the first frame update
     void Awake()
@@ -68,7 +67,9 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collided) {
         // first collision will double speed
-        if(waitingForFirstCollision){
+        if(waitingForFirstCollision && 
+            (collided.gameObject.name == "Computer" ||
+             collided.gameObject.name == "Player")){
             speed = speed * openingHandicap;
             waitingForFirstCollision = false;
         }
@@ -81,5 +82,4 @@ public class Ball : MonoBehaviour
        }
     }
 
-    
 }

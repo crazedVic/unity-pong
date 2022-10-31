@@ -11,19 +11,6 @@ public class ComputerPaddle : BasePaddle
     [Range(3.0f, 13.0f)]
     private float _speed = 8f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // paddleY.text = rb.velocity.y.ToString();
-        // rb.MovePosition(new Vector2(0,ball.position.y));
-    }
-
    protected void FixedUpdate()
     {
         /* 
