@@ -982,7 +982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 308815551}
-  _speed: 5.45
+  _speed: 5.65
 --- !u!61 &643488329
 BoxCollider2D:
   m_ObjectHideFlags: 0
