@@ -55,7 +55,7 @@ public class Ball : MonoBehaviour
     
         if(!waitingForFirstCollision) {
             // means game round ended
-            speed = speed /openingHandicap;
+            speed /= openingHandicap;
             waitingForFirstCollision = true;
         }
 

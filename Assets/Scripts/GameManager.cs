@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     private int computerScore = 0;
     private int playerScore = 0;
 
+    // publish to github pages
+    // https://www.youtube.com/watch?v=CrsG_v1lCiQ&ab_channel=Simmer.io
     void Awake(){
        Ball.PlayerScoresHandler += OnPlayerScores;
        Ball.ComputerScoresHandler += OnComputerScores;
