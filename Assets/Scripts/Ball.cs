@@ -10,15 +10,20 @@ public class Ball : MonoBehaviour
     Rigidbody2D rb;
 
     [SerializeField]
-    TextMeshProUGUI  ballSpeed;
+    TextMeshProUGUI  ballSpeedLabel;
 
     [SerializeField]
     [Range(1.0f, 20.0f)]
-    private float speed = 5f;
-    
+    private float baseSpeed = 5f;
+    private float currentSpeed;
+
+    [SerializeField]
+    [Range(15.0f, 30.0f)]
+    private float maxSpeed = 17.0f;
+
     [SerializeField]
     [Range(1.0f, 2.0f)]
-    private float openingHandicap = 1.6f;
+    private float speedMultiplier = 1.1f;
     private bool waitingForFirstCollision = true;
 
     private Vector3 lastPosition;
@@ -37,15 +42,13 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float speed = Vector3.Distance(lastPosition, transform.position) * 100f;
-       // float speed = (transform.position - lastPosition).magnitude / Time.deltaTime;
-        ballSpeed.text = rb.velocity.magnitude.ToString();
+        ballSpeedLabel.text = rb.velocity.magnitude.ToString();
         lastPosition = transform.position;
     }
 
     private void FixedUpdate() {
         // keep ball speed constant
-         rb.velocity = speed * (rb.velocity.normalized);
+         rb.velocity = currentSpeed * (rb.velocity.normalized);
     }
 
     private void launch(){
@@ -53,25 +56,20 @@ public class Ball : MonoBehaviour
         // called on game start
         // to set ball moving in a random direction
     
-        if(!waitingForFirstCollision) {
-            // means game round ended
-            speed /= openingHandicap;
-            waitingForFirstCollision = true;
-        }
+        currentSpeed = baseSpeed;
 
         float x = UnityEngine.Random.value > 0.5f ? -1.0f : 1.0f;
         float y = UnityEngine.Random.value < 0.5f ? UnityEngine.Random.Range(-1f, -0.5f) : UnityEngine.Random.Range(0.5f, 1.0f);
-        rb.velocity = new Vector2(x,y)*(speed/openingHandicap);
+        rb.velocity = new Vector2(x,y)*currentSpeed;
 
     }
 
     private void OnCollisionEnter2D(Collision2D collided) {
         // first collision will double speed
-        if(waitingForFirstCollision && 
-            (collided.gameObject.name == "Computer" ||
-             collided.gameObject.name == "Player")){
-            speed = speed * openingHandicap;
-            waitingForFirstCollision = false;
+        if(
+            collided.gameObject.name == "Player Paddle"){
+            currentSpeed = 
+                Mathf.Clamp(currentSpeed * speedMultiplier, baseSpeed, maxSpeed);
         }
             
        if(collided.gameObject.name =="Computer"){
