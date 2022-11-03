@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerPaddle : BasePaddle
 {
-
     [SerializeField]
     [Range(5.0f, 25.0f)]
     private float _speed = 8f;
+
+    public static PlayerControls Controls;
+
+    private void OnEnable()
+    {
+        Controls ??= new PlayerControls();
+        Controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        Controls.Disable();
+    }
 
     // Update is called once per frame
     private void Update()
@@ -19,20 +32,8 @@ public class PlayerPaddle : BasePaddle
         //    _direction = Camera.main.ScreenToWorldPoint(Touchscreen.current.primaryTouch.position.ReadValue());
         //}
         //else 
-        if (Keyboard.current.wKey.IsActuated(0))
-        {
-            _direction = Vector2.up;
 
-        }
-        else if (Keyboard.current.sKey.IsActuated(0))
-       // else if (Input.GetKey(KeyCode.S))
-        {
-            _direction = Vector2.down;
-        }
-        else
-        {
-            _direction = Vector2.zero;
-        }
+        _direction = new Vector2(0, Controls.PlayerPaddle.Vertical.ReadValue<float>());
 
         //paddleX.text = rb.velocity.y.ToString();
     }

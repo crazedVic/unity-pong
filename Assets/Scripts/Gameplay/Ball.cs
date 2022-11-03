@@ -4,10 +4,9 @@ using TMPro;
 
 public class Ball : MonoBehaviour
 {
-
     public static Action ComputerScoresHandler;
     public static Action PlayerScoresHandler;
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     [SerializeField]
     TextMeshProUGUI  ballSpeed;
@@ -27,54 +26,56 @@ public class Ball : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        GameManager.NewRoundHandler += launch;
+        GameManager.OnNewRoundStarted += Launch;
     }
 
     private void Start(){
-        launch();
+        Launch();
         lastPosition = transform.position;
     }
     // Update is called once per frame
     void Update()
     {
-        float speed = Vector3.Distance(lastPosition, transform.position) * 100f;
-       // float speed = (transform.position - lastPosition).magnitude / Time.deltaTime;
         ballSpeed.text = rb.velocity.magnitude.ToString();
         lastPosition = transform.position;
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate() 
+    {
         // keep ball speed constant
-         rb.velocity = speed * (rb.velocity.normalized);
+        rb.velocity = speed * (rb.velocity.normalized);
     }
 
-    private void launch(){
+    private void Launch(){
         //this should be triggered by an invoked action start game button
         // called on game start
         // to set ball moving in a random direction
     
-        if(!waitingForFirstCollision) {
+        if(!waitingForFirstCollision) 
+        {
             // means game round ended
-            speed = speed /openingHandicap;
+            speed = speed / openingHandicap;
             waitingForFirstCollision = true;
         }
 
         float x = UnityEngine.Random.value > 0.5f ? -1.0f : 1.0f;
         float y = UnityEngine.Random.value < 0.5f ? UnityEngine.Random.Range(-1f, -0.5f) : UnityEngine.Random.Range(0.5f, 1.0f);
-        rb.velocity = new Vector2(x,y)*(speed/openingHandicap);
-
+        rb.velocity = new Vector2(x,y) * (speed / openingHandicap);
     }
 
-    private void OnCollisionEnter2D(Collision2D collided) {
+    private void OnCollisionEnter2D(Collision2D collided) 
+    {
         // first collision will double speed
         if(waitingForFirstCollision && 
             (collided.gameObject.name == "Computer" ||
-             collided.gameObject.name == "Player")){
+             collided.gameObject.name == "Player"))
+        {
             speed = speed * openingHandicap;
             waitingForFirstCollision = false;
         }
             
-       if(collided.gameObject.name =="Computer"){
+       if(collided.gameObject.name == "Computer")
+       {
             PlayerScoresHandler.Invoke();
        }
        if(collided.gameObject.name == "Player"){
