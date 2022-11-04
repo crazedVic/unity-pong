@@ -132,9 +132,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 308815550}
+  - component: {fileID: 308815552}
   - component: {fileID: 308815549}
   - component: {fileID: 308815551}
-  - component: {fileID: 308815552}
   - component: {fileID: 308815553}
   m_Layer: 0
   m_Name: Ball
@@ -243,9 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f16b99908a2e44bdad6de0deb414c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSpeed: {fileID: 496605374}
-  speed: 10.1
-  openingHandicap: 1.6
+  ballSpeedLabel: {fileID: 496605374}
+  baseSpeed: 8.5
+  maxSpeed: 22.9
+  speedMultiplier: 1.2
 --- !u!61 &308815553
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -455,7 +456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &496605373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -471,11 +472,11 @@ RectTransform:
   m_Father: {fileID: 2000663895}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 173}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &496605374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,8 +524,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -559,7 +560,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -96.333435, y: 55.302536, z: -96.333435, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -982,7 +983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 308815551}
-  _speed: 5.65
+  _speed: 7.5
 --- !u!61 &643488329
 BoxCollider2D:
   m_ObjectHideFlags: 0
